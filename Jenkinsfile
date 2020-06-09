@@ -1,19 +1,15 @@
-node{
+pipeline {
+    agent any
 
-stage('Fetch Code Staging') {
-  sh "git clone https://github.com/RahulSK1807/demoapp.git"
-  sh "pwd"
-}
-//Stage 1 : Build the docker image.
-
-stage('Build image') {
-  sh "sudo docker build -t asia.gcr.io/fabhotels-development/demoapp ."
-}
-
-//Stage 2 : Push the image to GCR
-stage('Push image to registry') {
-  sh "gcloud auth configure-docker"
-  sh "sudo docker push asia.gcr.io/fabhotels-development/demoapp"
-  }
- }    
+    stages {
+        stage ('build) {
+              sh "sudo docker build -t asia.gcr.io/devproject-bala/nginx ."
+        }
+        stage('Push images') {
+             docker.withRegistry('https://asis.gcr.io', 'gcr:devproject-bala') {
+                myContainer.push("${env.BUILD_NUMBER}")
+                myContainer.push("latest")
+            }
+        }
+    }
 }
