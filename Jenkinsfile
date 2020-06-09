@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('Push images') {
-             docker.withRegistry('https://asis.gcr.io', 'gcr:devproject-bala') {
+            docker.withRegistry('https://asis.gcr.io', 'gcr:devproject-bala') {
                 myContainer.push("${env.BUILD_NUMBER}")
                 myContainer.push("latest")
             }
