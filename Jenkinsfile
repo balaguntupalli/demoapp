@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage ('build) {
-              sh "sudo docker build -t asia.gcr.io/devproject-bala/nginx ."
+            steps {
+               sh "sudo docker build -t asia.gcr.io/devproject-bala/nginx ."
+            }
         }
         stage('Push images') {
              docker.withRegistry('https://asis.gcr.io', 'gcr:devproject-bala') {
