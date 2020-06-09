@@ -3,14 +3,12 @@ pipeline {
 
     stages {
         stage('build') {
-            steps {
-               sh 'docker build -t asia.gcr.io/devproject-bala/nginx .'
-            }
+            app = docker.build("devproject-bala/nginx")
         }
         stage('Push images') {
-            docker.withRegistry('https://asis.gcr.io', 'gcr:devproject-bala') {
-                myContainer.push("${env.BUILD_NUMBER}")
-                myContainer.push("latest")
+            docker.withRegistry('https://asia.gcr.io', 'gcr:devproject-bala') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
             }
         }
     }
