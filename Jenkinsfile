@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-               sh "sudo docker build -t asia.gcr.io/devproject-bala/nginx ."
+               sh 'docker build -t asia.gcr.io/devproject-bala/nginx .'
             }
         }
         stage('Push images') {
