@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('build) {
+        stage('build') {
             steps {
                sh "sudo docker build -t asia.gcr.io/devproject-bala/nginx ."
             }
